@@ -1,5 +1,9 @@
 package com.kumar.test.data.model
 
+import com.cariad.test.data.model.CheckinStatusType
+import com.cariad.test.data.model.CommentType
+import com.cariad.test.data.model.UserX
+
 data class UserComment(
     val ChargePointID: Int,
     val CheckinStatusType: CheckinStatusType,

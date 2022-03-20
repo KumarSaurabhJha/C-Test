@@ -1,4 +1,4 @@
-package com.kumar.test.data.model
+package com.cariad.test.data.model
 
 data class UserX(
     val APIKey: Any,

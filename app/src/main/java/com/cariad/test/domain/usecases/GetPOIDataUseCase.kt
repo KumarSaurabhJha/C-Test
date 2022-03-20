@@ -1,9 +1,9 @@
 package com.cariad.test.domain.usecases
 
+import com.cariad.test.data.model.POIRequestHeaders
 import com.cariad.test.domain.UseCase
-import com.kumar.test.data.model.POIData
-import com.kumar.test.data.model.POIRequestHeaders
-import com.kumar.test.data.repository.POIRepository
+import com.cariad.test.data.model.POIData
+import com.cariad.test.data.repository.POIRepository
 
 class GetPOIDataUseCase(
     private val POIRepository: POIRepository

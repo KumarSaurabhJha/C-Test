@@ -1,6 +1,6 @@
 package com.cariad.test.di
 
-import com.kumar.test.data.api.RestApi
+import com.cariad.test.data.api.RestApi
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

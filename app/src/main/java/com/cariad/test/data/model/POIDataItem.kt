@@ -1,5 +1,7 @@
 package com.kumar.test.data.model
 
+import com.cariad.test.data.model.*
+
 data class POIDataItem(
     val AddressInfo: AddressInfo,
     val Connections: List<Connection>,
