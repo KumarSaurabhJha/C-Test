@@ -76,8 +76,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(marker: Marker): Boolean {
 
         val poiDomainModel = poiViewModel.getPOIDomainModelFromSelectedMarker(marker.title)
-
         poiDomainModel?.let {
+            poiViewModel.cancelDataFetch()
             POIDetailsActivity.launchActivity(this, it)
         }
 
