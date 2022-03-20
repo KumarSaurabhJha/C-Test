@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cariad.test.data.model.POIData
 import com.cariad.test.data.model.POIRequestHeaders
+import com.cariad.test.domain.POIDomainModel
 import com.cariad.test.domain.usecases.GetPOIDataUseCase
 import com.cariad.test.presentation.util.Event
-import com.cariad.test.data.model.POIData
+import com.kumar.test.data.model.POIDataItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -27,7 +29,6 @@ class POIViewModel(
     private var fetchDataJob: Job? = null
 
     fun cancelDataFetch() {
-
         fetchDataJob?.let {
             if (it.isActive) {
                 it.cancel()
@@ -44,6 +45,29 @@ class POIViewModel(
         }
     }
 
+    fun getPOIDomainModelFromSelectedMarker(title: String?): POIDomainModel? {
+        if (title.isNullOrEmpty())
+            return null
+
+        val list: POIData = _poiDisplayList.value!!.peekContent()
+
+        val item: POIDataItem? = list.find {
+            title == it.AddressInfo.AddressLine1
+        }
+
+        return if (item != null) {
+            val addressInfo = item.AddressInfo
+            val address =
+                "${addressInfo.AddressLine1}\n ${addressInfo.Postcode} ${addressInfo.Country.Title}"
+            POIDomainModel(
+                item.OperatorInfo.Title,
+                item.NumberOfPoints,
+                address
+            )
+        } else {
+            null
+        }
+    }
 
     private suspend fun fetchPOIList() {
         val list = getPOIDataUseCase.execute(

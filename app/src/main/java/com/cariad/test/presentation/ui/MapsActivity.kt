@@ -3,6 +3,7 @@ package com.cariad.test.presentation.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.cariad.test.R
+import com.cariad.test.data.model.POIData
 import com.cariad.test.databinding.ActivityMapsBinding
 import com.cariad.test.presentation.viewmodel.POIViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -10,11 +11,11 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.cariad.test.data.model.POIData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -64,12 +65,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (this::mMap.isInitialized) {
             list.forEach {
-                val title = it.OperatorInfo.Title
+                val title = it.AddressInfo.AddressLine1
                 val coordinates = LatLng(it.AddressInfo.Latitude, it.AddressInfo.Longitude)
                 mMap.addMarker(MarkerOptions().position(coordinates).title(title))
+                mMap.setOnMarkerClickListener(this)
             }
         }
     }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+
+        val poiDomainModel = poiViewModel.getPOIDomainModelFromSelectedMarker(marker.title)
+
+        poiDomainModel?.let {
+            POIDetailsActivity.launchActivity(this, it)
+        }
+
+        return false
+    }
+
 
     override fun onPause() {
         super.onPause()

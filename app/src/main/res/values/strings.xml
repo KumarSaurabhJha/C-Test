@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Test</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="poi_detail_title">Title</string>
+    <string name="poi_detail_number_of_points">No. of Points</string>
+    <string name="poi_detail_address">Address</string>
 </resources>

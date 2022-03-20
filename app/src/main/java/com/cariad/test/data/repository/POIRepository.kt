@@ -1,8 +1,8 @@
 package com.cariad.test.data.repository
 
 import com.cariad.test.data.api.RestApi
-import com.cariad.test.data.model.POIRequestHeaders
 import com.cariad.test.data.model.POIData
+import com.cariad.test.data.model.POIRequestHeaders
 import retrofit2.Response
 import java.io.IOException
 
