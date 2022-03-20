@@ -1,0 +1,7 @@
+package com.kumar.test.data.model
+
+data class DataProviderStatusType(
+    val ID: Int,
+    val IsProviderEnabled: Boolean,
+    val Title: String
+)
