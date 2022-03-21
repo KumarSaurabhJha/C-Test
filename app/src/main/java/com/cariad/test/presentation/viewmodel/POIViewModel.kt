@@ -52,7 +52,7 @@ class POIViewModel(
         val list: POIData = _poiDisplayList.value!!.peekContent()
 
         val item: POIDataItem? = list.find {
-            title == it.AddressInfo.AddressLine1
+            title == it.OperatorInfo.Title
         }
 
         return if (item != null) {

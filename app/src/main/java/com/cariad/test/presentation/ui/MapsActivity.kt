@@ -65,7 +65,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         if (this::mMap.isInitialized) {
             list.forEach {
-                val title = it.AddressInfo.AddressLine1
+                val title = it.OperatorInfo.Title
                 val coordinates = LatLng(it.AddressInfo.Latitude, it.AddressInfo.Longitude)
                 mMap.addMarker(MarkerOptions().position(coordinates).title(title))
                 mMap.setOnMarkerClickListener(this)
