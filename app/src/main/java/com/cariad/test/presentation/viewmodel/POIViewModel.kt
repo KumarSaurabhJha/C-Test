@@ -22,6 +22,8 @@ class POIViewModel(
     private val _poiDisplayList = MutableLiveData<Event<POIData>>()
     val poiDisplayList: LiveData<Event<POIData>> get() = _poiDisplayList
 
+    val poiList = mutableListOf<POIDataItem>()
+
     val latitude: Double = 52.526
     val longitude: Double = 13.415
     private val distance: Int = 5
@@ -40,7 +42,7 @@ class POIViewModel(
         fetchDataJob = viewModelScope.launch(Dispatchers.IO) {
             while (true) {
                 fetchPOIList()
-                delay(TimeUnit.SECONDS.toMillis(30))
+               delay(TimeUnit.SECONDS.toMillis(30))
             }
         }
     }
@@ -49,9 +51,8 @@ class POIViewModel(
         if (title.isNullOrEmpty())
             return null
 
-        val list: POIData = _poiDisplayList.value!!.peekContent()
 
-        val item: POIDataItem? = list.find {
+        val item: POIDataItem? = poiList.find {
             title == it.OperatorInfo.Title
         }
 
@@ -77,6 +78,8 @@ class POIViewModel(
                 distance = distance
             )
         )
+        poiList.clear()
+        poiList.addAll(list)
         _poiDisplayList.postValue(Event(list))
     }
 

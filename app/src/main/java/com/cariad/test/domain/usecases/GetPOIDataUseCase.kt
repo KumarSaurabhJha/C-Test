@@ -5,10 +5,10 @@ import com.cariad.test.data.model.POIRequestHeaders
 import com.cariad.test.data.repository.POIRepository
 import com.cariad.test.domain.UseCase
 
-class GetPOIDataUseCase(
-    private val POIRepository: POIRepository
+open class GetPOIDataUseCase(
+    private val poiRepository: POIRepository
 ) : UseCase<POIRequestHeaders, POIData> {
 
     override suspend fun execute(input: POIRequestHeaders): POIData =
-        POIRepository.getAllPOI(input)
+        poiRepository.getAllPOI(input)
 }

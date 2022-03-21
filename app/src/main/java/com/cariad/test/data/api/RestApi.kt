@@ -9,7 +9,6 @@ import retrofit2.http.Query
 
 interface RestApi {
 
-
     @GET("v3/poi")
     suspend fun getPointOfInterest(
         @Header("latitude") latitude: Double,
