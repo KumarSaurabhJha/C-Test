@@ -42,7 +42,7 @@ class POIViewModel(
         fetchDataJob = viewModelScope.launch(Dispatchers.IO) {
             while (true) {
                 fetchPOIList()
-               delay(TimeUnit.SECONDS.toMillis(30))
+                delay(TimeUnit.SECONDS.toMillis(30))
             }
         }
     }
